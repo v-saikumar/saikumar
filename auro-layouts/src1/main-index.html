@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+  <script>
+    $(document).ready(function(){
+
+        $(".collapse.in").each(function(){
+          $(this).siblings(".panel-heading").find(".glyphicon").addClass("glyphicon-minus-sign").removeClass("glyphicon-plus-sign");
+        });
+        
+        $(".collapse").on('show.bs.collapse', function(){
+          $(this).parent().find(".glyphicon").removeClass("glyphicon-plus-sign").addClass("glyphicon-minus-sign");
+        }).on('hide.bs.collapse', function(){
+          $(this).parent().find(".glyphicon").removeClass("glyphicon-minus-sign").addClass("glyphicon-plus-sign");
+        });
+
+        $("#master-data-clear").click(function() {
+          $("#keywords").val("");
+          $("#criteria").val("");
+          $(".success").html("");     
+        });
+
+        $('#master-data-save').click(function(e) {
+          if ($("#keywords").val() != "" && $("#criteria").val() !="") {
+
+          $(".success").html("<p class='alert alert-success'>data saved successful !</p>");
+          
+          $("#keywords").val("");
+          $("#criteria").val("");
+          setTimeout(successmsg, 3000);
+          e.preventDefault();
+          } 
+        });
+
+        function successmsg(){
+          $(".success").html("");
+        }
+        setTimeout(successmsg, 3000);
+    });
+</script>
+<script>
+function openNav() {
+  document.getElementById("main-sidenav").style.width = "100%";
+}
+
+function closeNav() {
+  document.getElementById("main-sidenav").style.width = "0%";
+}
+</script>
+<style type="text/css">
+    body {
+      font-family: 'Roboto Condensed', sans-serif;
+    }
+    input::placeholder{
+     font-weight: 100;
+      font-size: 18px;
+      color: #f8f8f8;
+    }
+      .row {
+      margin-top: 15px;
+      margin-bottom: 15px;
+      margin-right: -15px;
+      margin-left: -15px;
+    }
+    .panel-group .panel {
+        border-radius: 5px;
+        box-shadow: none;
+        border-color: #EEEEEE;
+    }
+
+    .panel-default > .panel-heading {
+        border-bottom: 0px;
+        padding: 5px;
+        border-radius: 0;
+        color: #212121;
+        background-color: #FAFAFA;
+        border-color: #EEEEEE;
+    }
+
+    .panel-title {
+        font-size: 19px;
+    }
+
+    .panel-title > a {
+        display: block;
+        padding: 15px;
+        text-decoration: none;
+    }
+
+    .more-less {
+        float: right;
+        color: #212121;
+    }
+    .panel-collapse > .panel-body {
+      background-color: #FAFAFA;
+    }
+
+    .panel-default > .panel-heading + .panel-collapse > .panel-body {
+        border-top-color: #EEEEEE;
+        border-top: none;
+        padding-left: 30px;
+    }
+
+    .form-group > .form-control {
+      height: 50px;
+    }
+    .list-group-item .form-control{
+      color: #ccc;
+      font-weight: 100;
+      border: 1px solid transparent;
+    }
+  
+    .glyphicon{
+    padding-right: 5px;
+    vertical-align: middle;
+    top: 0;
+    font-size: 19px;
+    }
+    .btn{
+      font-size: 18px;
+      margin-right: 5px;
+      border-radius: 4px;
+      border-color: #337ab7;
+      width: 150px;
+    }
+    .btn-sbt{
+      width: 80px;
+    }
+    .btn-grp{
+      border-color: #ccc;
+      color: #ccc;
+      font-weight: 100;
+    }
+    .btn-title{
+      font-weight: bold;
+      font-size: 19px;
+    }
+    .list-group-item{
+      padding: 0;
+      border: 0;
+      display: inline-block;
+      background-color: #FAFAFA;
+      margin-bottom: 5px; 
+    } 
+   .list-group-item > .form-control{
+      height: 46px;
+      width: 155px;
+      box-shadow: none;
+      text-align: center;
+    }
+    .list-tite{
+      font-weight: normal;
+      font-size: 19px;
+      margin-right: 20px;
+    }
+    td {
+      padding: 0 2px 4px  2px;
+      position: relative;
+      left: 20px;
+    }
+    tr .update-indent {
+      position: inherit;
+      left: inherit; 
+    }
+    .overlay {
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    height: 100%;
+    left: 0;
+    overflow-x: hidden;
+    position: fixed;
+    top: 0;
+    transition: 0.5s;
+    z-index: 1;
+    width: 0;
+}
+
+.overlay-content {
+    margin-top: 30px;
+    position: relative;
+    text-align: center;
+    top: 25%;
+    width: 100%;
+}
+
+.overlay a {
+    color: #818181;
+    display: block;
+    font-size: 36px;
+    padding: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+
+.overlay .closebtn {
+    font-size: 60px;
+    position: absolute;
+    right: 45px;
+    top: 20px;
+}
+@media only screen and (max-width: 992px){
+  .navbar-form{
+      margin-right: 150px !important;
+  }
+  .nav-pro{
+    margin-top: -75px;
+  }
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+    font-size: 40px;
+    right: 35px;
+    top: 15px;
+  }
+   .navbar-form > .form-group > .article-search {
+  width: 200%;
+}
+}
+.notification-rocon {
+  background-color: red;
+    border-radius: 100%;
+    width: 21px;
+    height: 50%;
+    color: white;
+    font-weight: bold;
+    margin-top: -1vw;
+    margin-right: -3vw;
+    z-index: 1;
+    position: relative;
+}
+.row > .article-admin {
+  padding: 0;
+}
+.navbar-form > .form-group > .article-search {
+  border-radius: 33px;
+  width: 200%;
+  margin-top: 8px;
+  border: 0;
+}
+/*@media screen and (min-height: 500px) {
+ .navbar-form > .form-group > .article-search {
+  border-radius: 33px;
+  width: 200%;
+  margin-top: 8px;
+  border: 0;
+}
+}*/
+input {
+  border: 0.3px grey !important; 
+}
+ 
+</style>
+</head>
+<body>
+<div class="container-fluid" style="padding: 0;">   
+  <nav class="navbar navbar-default col-md-12" style="padding: 8px 0px 0px 0px;">
+      <div class="container-fluid">
+        <center>
+
+          <div class="col-md-3">
+            <ul class="nav navbar-nav">
+              <li class="active"><span style="font-size:30px;cursor:pointer" >&#9776; </span></li>
+            </ul>
+            
+            <div class="navbar-header text-center">
+              <a class="" href="#"><img src="logo.png" class="img img-responsive" alt="logo" width="120px" height="30px" style="margin-left: 4px!important;margin-left: 4px!important;
+    margin-top: 18px;">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="navbar-form text-center" id="search" role="search">
+              <form name="article-search" class="navbar-form">
+                          <div class="form-group">
+                              <input type="text" class="article-search form-control" placeholder="&#128269 Search ">
+                          </div>
+                      </form>
+        </div>
+      </div>
+          <div class="col-md-4 nav-pro" style="margin-left: 8%;">
+            <ul class="nav navbar-nav navbar-right">
+
+              <li class="row" style="margin-top:1px;text-align: right;">
+                <a href="#" style="color:#272754;"><bold>Sravantika</bold></a>
+                <a href="#" class="article-admin" style="margin-right: 15%;margin-top: -17%;color:#272754;    font-family: sans-serif;">Admin</a>
+              </li>
+              <li><a href="#"><img class="img-responsive" src="home.png" width="50px" height="50px" alt="user image" style="border-radius: 50%;"><p class="notification-rocon">2</p></a></li>
+            </ul>
+            
+          </div>
+        </center>
+      </div>
+  </nav>
+  <div id="main-sidenav" class="overlay">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="overlay-content">
+    <a href="#">About Auro</a>
+    <a href="#">Advance Article Search</a>
+    <a href="#">Drafts</a>
+    <a href="#">Translate</a>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><span class="glyphicon glyphicon-plus-sign text-primary"></span>Master Data Creation / Update</a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse in">
+        <div class="panel-body">
+        <form>
+          <div class="form-group">
+            <input type="text" class="form-control" id="keywords" placeholder="Enter Keywords" required>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="criteria" placeholder="Enter Search Criteria" required>
+          </div>
+          <p class="success"></p>
+          <button type="submit" id="master-data-save" class="btn btn-primary btn-sbt">Save</button>
+          <button type="submit" id="master-data-clear" class="btn btn-default btn-sbt">Clear</button>
+        </form>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><span class="glyphicon glyphicon-plus-sign text-primary"></span>Schedule Frequency</a>
+        </h4>
+      </div>
+      <div id="collapse2" class="panel-collapse collapse">
+        <div class="panel-body">
+          <ul class="list-group">
+          <li class="list-group-item list-tite" style="margin-right: 25px;">Weekly</li>
+            <form>
+              <div class="form-group">
+                <input type="text" class="form-control" id="weekly-keywords" placeholder="Enter Keywords" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" id="weekly-criteria" placeholder="Enter Search Criteria" required>
+              </div>
+              <p class="weekly-success"></p>
+            </form>
+            <script type="text/javascript">
+              $(document).ready(function(){ 
+
+                   $("#weekly-data-clear").click(function() {
+                    $("#weekly-keywords").val("");
+                    $("#weekly-criteria").val("");
+                    $(".weekly-success").html("");     
+                  });
+
+                  $('#weekly-data-save').click(function(e) {
+                    if ($("#weekly-keywords").val() != "" && $("#weekly-criteria").val() !="") {
+
+                    $(".weekly-success").html("<p class='alert alert-success'>data saved successful !</p>");
+                    
+                    $("#weekly-keywords").val("");
+                    $("#weekly-criteria").val("");
+                    setTimeout(successmsg, 3000);
+                    e.preventDefault();
+                    } 
+                  });
+
+                  function successmsg(){
+                    $(".success").html("");
+                  }
+                  setTimeout(successmsg, 3000);
+              });
+
+              $(document).ready(function(){ 
+
+                   $("#monthly-data-clear").click(function() {
+                    $("#monthly-keywords").val("");
+                    $("#monthly-criteria").val("");
+                    $(".monthly-success").html("");     
+                  });
+
+                  $('#monthly-data-save').click(function(e) {
+                    if ($("#monthly-keywords").val() != "" && $("#monthly-criteria").val() !="") {
+
+                    $(".monthly-success").html("<p class='alert alert-success'>data saved successful !</p>");
+                    
+                    $("#monthly-keywords").val("");
+                    $("#monthly-criteria").val("");
+                    setTimeout(successmsg, 3000);
+                    e.preventDefault();
+                    } 
+                  });
+
+                  function successmsg(){
+                    $(".success").html("");
+                  }
+                  setTimeout(successmsg, 3000);
+              });
+
+              $(document).ready(function(){ 
+
+                   $("#custom-data-clear").click(function() {
+                    $("#custom-keywords").val("");
+                    $("#custom-criteria").val("");
+                    $(".custom-success").html("");     
+                  });
+
+                  $('#custom-data-save').click(function(e) {
+                    if ($("#custom-keywords").val() != "" && $("#custom-criteria").val() !="") {
+
+                    $(".custom-success").html("<p class='alert alert-success'>data saved successful !</p>");
+                    
+                    $("#custom-keywords").val("");
+                    $("#custom-criteria").val("");
+                    setTimeout(successmsg, 3000);
+                    e.preventDefault();
+                    } 
+                  });
+
+                  function successmsg(){
+                    $(".success").html("");
+                  }
+                  setTimeout(successmsg, 3000);
+              });
+                $(document).ready(function(){ 
+                  $('.dropdown').on( 'click', '.dropdown-menu li a', function() { 
+                       var target = $(this).html();
+
+                       //Adds active class to selected item
+                       $(this).parents('.dropdown-menu').find('li').removeClass('active');
+                       $(this).parent('li').addClass('active');
+
+                       //Displays selected text on dropdown-toggle button
+                       $(this).parents('.dropdown').find('.dropdown-toggle').html(target + ' <span class="caret"></span>');
+                    });  
+                });
+  
+            </script>
+            <li class="list-group-item">
+                <div class="dropdown">
+                <button class="btn btn-default btn-lg btn-grp dropdown-toggle " type="button" data-toggle="dropdown">Springer 
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">medPro</a></li>
+                  <li><a href="#">pharma.com</a></li>
+                </ul>
+              </div>
+          </li>
+            <li class="list-group-item">
+              <div class="dropdown">
+                <button class="btn btn-default btn-lg btn-grp dropdown-toggle" type="button" data-toggle="dropdown">September
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">January</a></li>
+                  <li><a href="#">February</a></li>
+                  <li><a href="#">March</a></li>
+                  <li><a href="#">April</a></li>
+                  <li><a href="#">May</a></li>
+                  <li><a href="#">June</a></li>
+                  <li><a href="#">July</a></li>
+                  <li><a href="#">Aug</a></li>
+                  <li><a href="#">September</a></li> 
+                  <li><a href="#">October</a></li>
+                  <li><a href="#">November</a></li>
+                  <li><a href="#">December</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="list-group-item">
+               <div class="dropdown">
+                <button class="btn btn-default btn-lg btn-grp dropdown-toggle" type="button" data-toggle="dropdown">Monday
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                   <li><a href="#">Tuesday</a></li>
+                  <li><a href="#">Wednesday</a></li>
+                  <li><a href="#">Thursday</a></li>
+                  <li><a href="#">Friday</a></li>
+                  <li><a href="#">Saturday</a></li>
+                  <li><a href="#">Sunday</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="list-group-item">
+                  <input class="form-control" type="time" placeholder="12:00 AM" value="12:00">
+            </li>
+            <li class="list-group-item">
+                  <input class="form-control" type="time" placeholder="11:59 PM" value="11:59">
+            </li>
+            <li class="list-group-item">
+              <button type="button" id="weekly-data-save" class="btn btn-primary btn-sbt">Save</button>
+            </li>
+            <li class="list-group-item">
+              <button type="button" id="weekly-data-clear" class="btn btn-default  btn-sbt">Clear</button>
+            </li>
+          </ul>
+          <ul class="list-group">
+          <li class="list-group-item list-tite">Monthly</li>
+            <form>
+              <div class="form-group">
+                <input type="text" class="form-control" id="monthly-keywords" placeholder="Enter Keywords" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" id="monthly-criteria" placeholder="Enter Search Criteria" required>
+              </div>
+              <p class="monthly-success"></p>
+            </form>
+            <li class="list-group-item">
+                <div class="dropdown">
+                <button class="btn btn-default btn-lg btn-grp dropdown-toggle " type="button" data-toggle="dropdown">Springer 
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">medPro</a></li>
+                </ul>
+              </div>
+          </li>
+            <li class="list-group-item">
+              <div class="dropdown">
+                <button class="btn btn-default btn-lg btn-grp dropdown-toggle" type="button" data-toggle="dropdown">September
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">January</a></li>
+                  <li><a href="#">February</a></li>
+                  <li><a href="#">March</a></li>
+                  <li><a href="#">April</a></li>
+                  <li><a href="#">May</a></li>
+                  <li><a href="#">June</a></li>
+                  <li><a href="#">July</a></li>
+                  <li><a href="#">Aug</a></li>
+                  <li><a href="#">September</a></li> 
+                  <li><a href="#">October</a></li>
+                  <li><a href="#">November</a></li>
+                  <li><a href="#">December</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="list-group-item">
+               <div class="dropdown">
+                <button class="btn btn-default btn-lg btn-grp dropdown-toggle" type="button" data-toggle="dropdown">01
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">02</a></li>
+                  <li><a href="#">03</a></li>
+                  <li><a href="#">04</a></li>
+                  <li><a href="#">05</a></li>
+                  <li><a href="#">06</a></li>
+                  <li><a href="#">07</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="list-group-item">
+                  <input class="form-control" type="text" placeholder="12:00 AM">
+            </li>
+            <li class="list-group-item">
+                  <input class="form-control" type="text" placeholder="11:59 PM">
+            </li>
+            <li class="list-group-item">
+              <button type="button" id="monthly-data-save" class="btn btn-primary btn-sbt">Save</button>
+            </li>
+            <li class="list-group-item">
+              <button type="button" id="monthly-data-clear" class="btn btn-default  btn-sbt">Clear</button>
+            </li>
+          </ul>
+          <ul class="list-group">
+          <li class="list-group-item list-tite">Custom</li>
+            <form>
+              <div class="form-group">
+                <input type="text" class="form-control" id="custom-keywords" placeholder="Add Keywords" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" id="custom-criteria" placeholder="Add Search Criteria" required>
+              </div>
+              <p class="custom-success"></p>
+            </form>
+            <li class="list-group-item">
+                <div class="dropdown">
+                <button class="btn btn-default btn-lg btn-grp dropdown-toggle " type="button" data-toggle="dropdown">Springer 
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">MedPro</a></li>
+                </ul>
+              </div>
+          </li>
+            <li class="list-group-item">
+              <div class="dropdown">
+                <button class="btn btn-default btn-lg btn-grp dropdown-toggle" type="button" data-toggle="dropdown">September
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">January</a></li>
+                  <li><a href="#">February</a></li>
+                  <li><a href="#">March</a></li>
+                  <li><a href="#">April</a></li>
+                  <li><a href="#">May</a></li>
+                  <li><a href="#">June</a></li>
+                  <li><a href="#">July</a></li>
+                  <li><a href="#">Aug</a></li>
+                  <li><a href="#">September</a></li> 
+                  <li><a href="#">October</a></li>
+                  <li><a href="#">November</a></li>
+                  <li><a href="#">December</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="list-group-item">
+                <input class="form-control" type="date">
+            </li>
+            <li class="list-group-item">
+                <input class="form-control" type="date">
+            </li>
+            <li class="list-group-item">
+                  <input class="form-control" type="text" placeholder="Enter Name">
+            </li>
+            <li class="list-group-item">
+              <button type="button" id="custom-data-save" class="btn btn-primary btn-sbt">Save</button>
+            </li>
+            <li class="list-group-item">
+              <button type="button" id="custom-data-clear" class="btn btn-default  btn-sbt">Clear</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><span class="glyphicon glyphicon-plus-sign text-primary"></span>Checklist Definition</a>
+        </h4>
+      </div>
+      <div id="collapse3" class="panel-collapse collapse">
+        <div class="panel-body">
+          <form>
+                <table>
+                  <tbody>
+                  <tr>
+                    <td style="visibility: hidden;">
+                      Does Drug Belongs to AuroBindo AuroBindo AuroBindo ?
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Does Drug Belongs to AuroBindo ?
+                    </td>
+                    <td>
+                          <label class="switch">
+                        <input class="switch-input" type="checkbox" />
+                        <span class="switch-label" data-on="Yes" data-off="No"></span> 
+                        <span class="switch-handle"></span> 
+                       </label>
+                       <style type="text/css">
+                         .switch {
+  position: relative;
+  display: block;
+  vertical-align: top;
+  width: 100px;
+  height: 30px;
+  padding: 3px;
+  margin: 0 10px 10px 0;
+  border-radius: 1px;
+  cursor: pointer;
+}
+.switch-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.switch-label {
+  position: relative;
+  display: block;
+  height: inherit;
+  font-size: 15px;
+  text-transform: uppercase;
+  background: #f7f7f7;
+  border-radius: 1px;
+}
+.switch-label:before, .switch-label:after {
+  position: absolute;
+  top: 50%;
+  margin-top: -.5em;
+  line-height: 1;
+  -webkit-transition: inherit;
+  -moz-transition: inherit;
+  -o-transition: inherit;
+  transition: inherit;
+}
+.switch-label:before {
+  content: attr(data-off);
+  right: 11px;
+  color: #aaaaaa;
+  text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+}
+.switch-label:after {
+  content: attr(data-on);
+  left: 11px;
+  color: #FFFFFF;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+}
+.switch-input:checked ~ .switch-label {
+  background: #385698;
+}
+.switch-input:checked ~ .switch-label:before {
+  opacity: 0;
+}
+.switch-input:checked ~ .switch-label:after {
+  opacity: 1;
+}
+.switch-handle {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 28px;
+  height: 28px;
+  background-image: -webkit-linear-gradient(top, #FFFFFF 40%, #f0f0f0);
+}
+.switch-handle:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -6px 0 0 -6px;
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(to bottom, #eeeeee, #FFFFFF);
+  background-image: -webkit-linear-gradient(top, #eeeeee, #FFFFFF);
+  border-radius: 6px;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.02);
+}
+.switch-input:checked ~ .switch-handle {
+  left: 74px;
+}
+ 
+/* Transition
+========================== */
+.switch-label, .switch-handle {
+  transition: All 0.3s ease;
+  -webkit-transition: All 0.3s ease;
+  -moz-transition: All 0.3s ease;
+  -o-transition: All 0.3s ease;
+}
+                       </style>
+<script type="text/javascript">
+  (function() {
+  $(document).ready(function() {
+    $('.switch-input').on('change', function() {
+      var isChecked = $(this).is(':checked');
+      var selectedData;
+      var $switchLabel = $('.switch-label');
+      console.log('isChecked: ' + isChecked); 
+      
+      if(isChecked) {
+        selectedData = $switchLabel.attr('data-on');
+      } else {
+        selectedData = $switchLabel.attr('data-off');
+      }
+      
+      console.log('Selected data: ' + selectedData);
+      
+    });
+    
+    // Params ($selector, boolean)
+    function setSwitchState(el, flag) {
+      el.attr('checked', flag);
+    }
+    
+    // Usage
+    setSwitchState($('.switch-input'), true);    
+  });
+  
+})();
+</script>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Country of Authorization:
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" id="exampleInputEmail1">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="update-indent">
+                      <a href="#"><h3>Product</h3></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Publication Date:
+                    </td>
+                    <td>
+                      <input type="text" placeholder="MM/DD/YYYY" class="form-control" id="exampleInputEmail1">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Approval Date:
+                    </td>
+                    <td>
+                      <input type="text" placeholder="MM/DD/YYYY" class="form-control" id="exampleInputEmail1">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Withdrawal Date:
+                    </td>
+                    <td>
+                      <input type="text" placeholder="MM/DD/YYYY" class="form-control" id="exampleInputEmail1">
+                    </td>
+                  </tr>
+                    <tr>
+                    <td class="update-indent">
+                      <a href="#"><h3>Drug</h3></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Start Date:
+                    </td>
+                    <td>
+                      <input type="text" placeholder="MM/DD/YYYY" class="form-control" id="exampleInputEmail1">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Approval Date:
+                    </td>
+                    <td>
+                      <input type="text" placeholder="MM/DD/YYYY" class="form-control" id="exampleInputEmail1">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Withdrawal Date:
+                    </td>
+                    <td>
+                      <input type="text" placeholder="MM/DD/YYYY" class="form-control" id="exampleInputEmail1">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Routes of Administration of Drugs:
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" id="exampleInputEmail1">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Drug Band:
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" id="exampleInputEmail1">
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      Relationship Between Drug and Event:
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" id="exampleInputEmail1">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="update-indent">
+                      <a href="#"><h3>Author Comment:</h3></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Case report found for the data basing ?
+                    </td>
+                    <td>
+                        <label class="switch">
+                        <input class="switch-input" type="checkbox" />
+                        <span class="switch-label" data-on="Yes" data-off="No"></span> 
+                        <span class="switch-handle"></span> 
+                       </label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Drug used for treatment:
+                    </td>
+                    <td>
+                      <label class="switch">
+                        <input class="switch-input" type="checkbox" />
+                        <span class="switch-label" data-on="Yes" data-off="No"></span> 
+                        <span class="switch-handle"></span> 
+                       </label>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </form>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+  <!-- container fluid -->
+</div>
+    <style type="text/css">
+  .main-dots{
+  background-color: #ecebebfa;
+    background-size: 37px 24px;
+    padding: 20%;
+    border: solid 0.3px #cecdcdfa;
+    border-radius: 100%;
+    cursor: pointer;
+  }
+  .max-article-header {
+    max-width: 1001px;
+      max-height: 30px;
+      overflow: hidden;
+      color: #3f77a7;
+  }
+  .max-article-body {
+    max-width: 1001px;
+    max-height: 95px;
+    overflow: hidden;
+    margin-bottom: 1%;
+    text-align: justify;
+    font-family: roboto sans-serif;
+  }
+  .article-hover:hover {
+    background-color: #f7f7f9;
+    border-radius: 10px; 
+    cursor: pointer;
+  }
+
+  .article-dot-icon > .glyphicon, .article-dot-icon > .glyphicon-option-vertical {
+    background-color: #2f92d4;
+    background-size: 10px 10px;
+    border-radius: 100%;
+    color: white;
+  }
+  .article-hover:hover > .article-hover-child > .show-on-hover {
+    display: block;
+  }
+
+  .show-on-hover {
+    display: none;
+  }
+  .article-hover {
+    margin: 1% 0;
+    padding: 1% 2%; 
+  }
+  .article-max-height {
+    border: solid 0.4px #cecdcdfa; 
+    font-size: 1.5em;
+    max-height: 700px;
+    overflow-y: scroll;
+  }
+  .download-articles {
+    margin: 7px 0;
+    padding: 0;
+    background-color: #cfcfcf36;
+    border: solid 1px #cecece;
+    border-radius: 50px;
+    width: 110px;
+    margin-right: 6.5%;
+  }
+</style>
+<script>
+function openNav() {
+  document.getElementById("main-sidenav").style.width = "100%";
+}
+
+function closeNav() {
+  document.getElementById("main-sidenav").style.width = "0%";
+}
+</script>
+<!--  <script type="text/javascript">
+    $(document).ready(function(){
+
+
+$('#myCarousel').carousel({
+  interval: 3000
+})
+
+$('.carousel-item').each(function(){
+  var next = $(this).next();
+  if (!next.length) {
+    next = $(this).siblings(':first');
+  }
+  next.children(':first-child').clone().appendTo($(this));
+  
+  if (next.next().length>0) {
+    next.next().children(':first-child').clone().appendTo($(this));
+  }
+  else {
+    $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+  }
+});
+
+
+     });
+ </script> -->
+<!-- <cards> -->
+<div class="container">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="row col-pd">
+          <div class="col-md-4">
+            <div class="card card-1">
+           <div class="card-body">
+             <h2 class="card-title">2166<span class="pull-right"><i class="fa fa-file-text" aria-hidden="true"></i></span></h2>
+             <h4 class="card-text">Abacavir Lamivudine...</h4>
+             <div class="row card-bottom">
+             <div class="card-text-sub">Monthly</div>
+            <div class="col-md-6">Sept 23-30</div>
+            <div class="col-md-6 text-right">PubMed</div>
+            </div>
+           </div>
+          </div> 
+          </div>
+          <div class="col-md-4">
+            <div class="card card-2">
+             <div class="card-body">
+               <h2 class="card-title">166<span class="pull-right"><i class="fa fa-file-text" aria-hidden="true"></i></h2>
+               <h4 class="card-text">Deanol Ascorbic Acid Magnesium...</h4>
+               <div class="row card-bottom">
+               <div class="card-text-sub">Monthly</div>
+              <div class="col-md-6">Aug 01-31</div>
+              <div class="col-md-6 text-right">Springer</div>
+              </div>
+             </div>
+            </div> 
+          </div>
+          <div class="col-md-4">
+            <div class="card card-3">
+             <div class="card-body">
+               <h2 class="card-title">166<span class="pull-right"><i class="fa fa-file-text" aria-hidden="true"></i></h2>
+               <h4 class="card-text">Amiloride And Hydrochlorothiazide</h4>
+               <div class="row card-bottom">
+                <div class="card-text-sub">Custom</div>
+                 <div class="col-md-6">Aug 01-3 Oct</div>
+                <div class="col-md-6 text-right">Springer</div>
+              </div>
+             </div>
+            </div> 
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="row arrow">
+          <div class="co-12 angle-icon ">
+            <a><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+     
+
+    <!-- <div class="col-md-4" id="card1">
+      <div class="card">
+        <div class="container-fluid">
+          <h2>2166</h2>
+          <h4 class="light-color">Abacavair Lamividine..</h4>
+          <h4 style="visibility: hidden;">Abacavair Lamividine..</h4>
+        </div>
+          <p class="pull-left">Weekly<br><small>Sept 23 - 30</small></p>
+          <small class="pull-right" style="margin-top: 10%;">Springer</small>
+      </div>
+    </div>
+    <div class="col-md-4" id="card2">
+        <div class="card">
+        
+        <div class="container-fluid">
+          <h2>166</h2> 
+          <h4 class="light-color">Deonol Acrobic acid...</h4> 
+          <h4 style="visibility: hidden;">Abacavair Lamividine..</h4>
+        </div>
+        <p class="pull-left">Monthly<br><small>Aug 01 - 31</small></p>
+        <small class="pull-right" style="margin-top: 10%;">Springer</small>
+      </div>
+    </div>
+    <div class="col-md-4" id="card3">
+        <div class="card">
+        
+        <div class="container-fluid">
+          <h2>555</h2> 
+          <h4 class="light-color">Amiloride and HidroChlorothiazide</h4> 
+        </div>
+        <p class="pull-left">Custom<br><small>Aug 19 - oct 3</small></p>
+        <small class="pull-right" style="margin-top: 10%;">Springer</small>
+
+      </div>
+    </div>
+    <div>
+      <i class="fa fa-angle-right" style="
+    color: #337ab7;
+    font-size: 63px;
+    background-color: lightgrey;
+    background-size: 80px 80px;
+    padding: 12px 25px 10px 39px;
+    border-radius: 100%;
+    float: right;
+    margin-top: -13%;"></i>
+    </div> -->
+
+<style type="text/css">
+  h1,h2,h3,h4,h5,h6{
+    margin: 0;
+  }
+.card{
+  padding: 20px;
+  color: white;
+  border-radius: 1px;
+  width: 100%;
+}
+.card-1{
+background-color: darkblue;
+}
+.card-2{
+  background-color: darkcyan;
+}
+.card-3{
+   background-color: grey;
+}
+.card-title{
+  font-weight: 500;
+  font-size: 36px;
+}
+.card-text{
+  font-size: 24px;
+  height: 100px;
+}
+.card-text-sub{
+  margin-left: 16px;
+  font-size: 18px;
+  font-weight: normal;
+}
+.arrow{
+  position: relative;
+}
+.angle-icon{
+  position: absolute;
+  right: -10px;
+  top: 80px;
+  font-size: 50px;
+  border-radius: 100%;
+  background-color: lightgray;
+ padding: 10px 35px;
+}
+.col-pd > .col-md-4{
+  padding-right: 4px;
+  padding-left: 4px;
+}
+/*.card .container-fluid {
+      min-height: 165px;
+    height: 165px;
+}
+  #card1 > .card {
+    background-color: darkblue;
+  }
+  #card2 > .card {
+    background-color: darkcyan;
+  }
+  #card3 > .card {
+    background-color: grey;
+  }
+  .card {
+    background-size: 50% 30%;
+    transition: 0.3s;
+    width: 70%;
+    margin: 5%;
+    padding: 5% 5% 12% 5%;
+    color: white;
+}
+.card:hover {
+    box-shadow: 0 0 0 0 rgba(0,0,0,) !important;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}*/
+</style>
+<br>
+<div class="container-fluid">
+
+  <div class="row" style="margin: 0 4%;"> 
+      <h4 class="col-md-11 max-article-header"><strong>Abacarvir Laminuvenine ...</strong> Weekly ( 23 - 30 sept)</h4>
+      <h4 class="pull-right"><span class="main-dots glyphicon glyphicon-option-vertical"></span></h4>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+    <div class="col-md-11.5 container article-max-height">
+      <div class="col">
+        <br>
+        <div class="col article-hover">
+          <div class="row article-hover-child">
+            <div class="col-md-11 max-article-header">    
+              <p><strong><a href="">Click the element below to open the side navigation F menu navigation menunavigation C menmenmenmen..</a></strong> </p>
+            </div>
+              <p class="pull-right article-dot-icon"><span class="glyphicon glyphicon-option-vertical"></span></p>
+          </div>
+          <div class="row article-hover-child">
+            <div class="col-md-10 max-article-body">    
+              <p>Click on the element below to open the side navigation menu ... Click on the element below to open the side navigation menu ...Click on the element below to open the side navigation menu ...Click on the element below to open the side navigation menu ...Click on the element below to open the side navigation menu ...</p>
+            </div>
+              <p class="col pull-right show-on-hover">
+                <a class="col" data-toggle="modal" data-target="#myModal" href="#">view full</a><br>
+                <a href="#">remove</a>
+              </p>
+          </div>
+          </div>
+      
+        </div>
+      </div>
+    </div>
+    <div class="row pull-right  download-articles">
+      <div class="text-center">
+        <h4>
+          <a href=""><i class="fa fa-download" aria-hidden="true" style="font-size:20px;"></i></a>
+                  &#32&#32<a href=""><i class=" fa fa-google-plus-square" style="font-size:20px;color:red"></i></a>&#32
+                  <a href=""><i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size:20px;color:pink"></i></a>&#32
+                  <a href="#"><span class="glyphicon glyphicon-option-vertical"></span></a>
+        </h4>
+          
+      </div>
+    </div>
+  </div>
+  <!-- caruosal -->
+
+  <style type="text/css">
+  .tab-pane > table > tbody > tr > * {
+    padding: 0.4em;
+    font-size: 1.1em;
+  }
+  .tab-pane > table > tbody > tr > td > a {
+    font-size: 1.3em;
+  }
+
+  .tab-pane {
+    background-color: #f7f7f7f7;
+    padding: 3%;
+  }
+ .inner-scrum > .nav-tabs>li.active>a, .inner-scrum > .nav-tabs>li.active>a:focus, .inner-scrum > .nav-tabs>li.active>a:hover {
+  background-color: #f7f7f7f7;
+  border: 0;
+ }
+ .abstract {
+  color: brown;
+ }
+ .single-article-header {
+  border: 0;
+ }
+ .article-table > tbody > tr > td > input {
+  width: 90%;
+  height: 22px;
+ }
+</style>
+<div class="container">
+<div class="row">
+ 
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+            <div class="col" style="background-color: #5c7bab; height: 2.5em; font-size: 20px;">
+              <div class="row" style="margin: 0">
+                <div class="col-md-11">
+                  <i  data-dismiss="modal" class="fa fa-close" style="font-size: 40px; color: #f9f6f6;float: right; margin-right: -10%; cursor: pointer"></i>
+<!--                   <span class="close pull-right glyphicon glyphicon-remove" data-dismiss="modal" style="padding: 2%"></span -->
+                </div>
+            </div>
+        </div>
+        <div class="modal-header single-article-header">
+          <div class="modal-title">
+            <div class="col">
+              <small>Drug 2015 123 apr 579 239 (123 0 -1 )  de 10/122/w3a 1233 23 </small>
+            </div>
+            <div class="col">
+              <h4><strong>An unsafe practice turned blood donors into victims.</strong></h4>
+            </div>
+            <div class="col">
+              <small><p><a href="#">Gerjso<sup>1</sup></a>&#32 &#32<a href="#">DIKCS ED</a></p></small>
+            </div>
+            <div class="col">
+              <small><span class="glyphicon glyphicon-plus"></span></small>Author Information
+            </div>
+            <br>
+            <div class="col">
+              <p><strong>Erratum En</strong></p>
+              <a href=""><small>Erratum to : singlt table regimin a review of it in HIV-1 injection. </small></a><small class="disabled">[Drugs 2015]</small>
+            </div>
+            <br>
+            <div class="col">
+                <h3 class="abstract">Abstract</h3>
+                <div class="col">
+                  Boitumelo Phakathi, Raquel Duarte, Caroline Dickens, Maureen Joffe, Sarah Nietz, Herbert Cubasch, Buccimazza, Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast  Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breast Chas Cacala, Judith Jacobson, Alfred Neugat, Paul Ruff Breastcancer and HIV in the era of highly active anti-retroviral therapy- a prospective, multi-centre study European Journal of Surgical Oncology, Volume 44, Supplement 1, March 2018, Pages S52-S53
+                </div>
+            </div>
+            <br>
+            <div class="col">
+              <small>PMID: 23422323 &#32 &#32 &#32 <a href="">DOI: 222-2123-23223123</a></small>
+              <br>
+              <small>[Indexed for Mediline]</small>
+            </div>
+            <div class="col">
+                <a href=""><i class="fa fa-facebook-official" style="font-size:20px;"></i></a>
+                <a href=""><i class="fa fa-twitter-square" style="font-size:20px;color:pink"></i></a>
+                <a href=""><i class=" fa fa-google-plus-square" style="font-size:20px;color:red"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-11.5">
+
+              <div class="inner-scrum tabbable" id="tabs-941338">
+                <ul class="nav nav-tabs single-article-header">
+                  <li class="col-md-2 nav-item">
+                    <a class="nav-link active show" href="#tab1" data-toggle="tab"><h4>CheckList</h4></a>
+                  </li>
+                  <li class="col-md-2 nav-item">
+                    <a class="nav-link" href="#tab2" data-toggle="tab"><h4>Comments</h4></a>
+                  </li>
+                  <li class="col-md-3 nav-item">
+                    <a class="nav-link" href="#tab3" data-toggle="tab"><h4>Full Article Request</h4></a>
+                  </li>
+                  <li class="col-md-3 nav-item">
+                    <a class="nav-link" href="#tab4" data-toggle="tab"><h4>Translation Request</h4></a>
+                  </li>
+                </ul>
+                <div class="tab-content">
+                  <div class="tab-pane active" id="tab1">
+                    <table class="article-table">
+                    <tr>
+                    <td>
+                      Does Drug Belongs to AuroBindo ?
+                    </td>
+                    <td>
+                        <label class="switch">
+                        <input class="switch-input" type="checkbox" />
+                        <span class="switch-label" data-on="Yes" data-off="No"></span> 
+                        <span class="switch-handle"></span> 
+                       </label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Country of Authorization:
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" id="exampleInputEmail1">
+                    </td>
+                  </tr>
+                    <tr>
+                    <td class="update-indent">
+                      <a href="#">Product</a>
+                    </td>
+                  </tr>
+                  <br>
+                  <tr>
+                    <td>
+                      Publication Date:
+                    </td>
+                    <td>
+                      <input type="text" placeholder="MM/DD/YYYY" class="form-control" id="exampleInputEmail1">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Approval Date:
+                    </td>
+                    <td>
+                      <input type="text" placeholder="MM/DD/YYYY" class="form-control" id="exampleInputEmail1">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Withdrawal Date:
+                    </td>
+                    <td>
+                      <input type="text" placeholder="MM/DD/YYYY" class="form-control" id="exampleInputEmail1">
+                    </td>
+                  </tr>
+                    <tr>
+                    <td class="update-indent">
+                      <a href="#">Drug</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Start Date:
+                    </td>
+                    <td>
+                      <input type="text" placeholder="MM/DD/YYYY" class="form-control" id="exampleInputEmail1">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Approval Date:
+                    </td>
+                    <td>
+                      <input type="text" placeholder="MM/DD/YYYY" class="form-control" id="exampleInputEmail1">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Withdrawal Date:
+                    </td>
+                    <td>
+                      <input type="text" placeholder="MM/DD/YYYY" class="form-control" id="exampleInputEmail1">
+                    </td>
+                  </tr>
+                    </table>
+                  </div>
+                  <div class="tab-pane" id="tab2">
+                    <p>
+                      Researcher comments
+                    </p>
+                  </div>
+                  <div class="tab-pane" id="tab3">
+                    <p>
+                      researcher full article request
+                    </p>
+                  </div>
+                  <div class="tab-pane" id="tab4">
+                    <p>
+                      request to translate
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="col pull-left">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Next</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Save As Draft</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Clear</button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</body>
+<footer style="background-color: lightgrey;width:102.1%;background-color: #f8f8f8;margin-left: -1%;">
+<!--    <div class="row-md-11"> -->
+      <div class="col-md-12 text-center" style="background-color: #f8f8f8;">
+          
+        <p class="col-md-3">About | Privacy</p>
+        <p class="col-md-6">Instance Assistance | 1800-180-1503</p>
+        <p class="col-md-3">For aurobindo Pharma's internal use only</p>
+      </div>
+      <!-- </div> -->
+   </footer>
+</html>

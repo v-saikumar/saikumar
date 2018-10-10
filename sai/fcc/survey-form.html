@@ -1,0 +1,145 @@
+<html lang="en">
+  <head>
+    <title>Survey Form</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"     content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
+
+html,body{
+  background-color: #effcfc;
+  text-align: center;
+  font-family: 'Raleway', Helvetica, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  min-width: 320px;
+}
+#title{
+  margin: 0px 0px 10px 0px;
+  color: #7ba3e0;
+}
+#description{
+  margin: 0px;
+  color : #51555b;
+  font-family: 'Lobster', sans-serif;
+}
+#survey-form{
+  padding: 20px 10px;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  margin: 25px auto;
+  width: 80%;
+    
+}
+.grid-container{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 350px 250px;
+  justify-content: space-around;
+  align-content: center;
+}
+.grid-container #labels{
+  display: grid;
+   justify-content: end;
+
+}
+.grid-container #fields{
+  display: grid;
+   align-content: start;
+}
+.grid-container div{
+  margin: 15px 0px;
+}
+
+  </style>
+</head>
+  <body>
+    <h1 id="title">Survey Form</h1>
+    <p id="description">How we can improve freeCodeCamp</p>
+      <form method="GET" action="" id="survey-form">
+        <div class="grid-container">
+            <div id="labels">
+              <label for="name" id='name-label'>Name</label>
+            </div>
+            <div id="fields">
+              <input type="text" id="name" name="name" class="input-field" placeholder="Enter Full Name" required >
+            </div>
+            <div id="labels">
+             <label for="email" id='email-label'>Email</label>
+            </div>
+            <div id="fields">
+              <input type="email" id="email" name="email" placeholder="Enter Email id" required >
+            </div>
+            <div id="labels">
+              <label for="number" id='number-label'>Mobile</label>
+            </div>
+            <div id="fields">
+              <input type="number" id="number" placeholder="Enter Mobile Number" required >
+            </div>
+            <div id="labels">
+              <label for="date" id='date-label'>Date of Birth</label>
+            </div>
+            <div id="fields">
+              <input type="date" id="date" placeholder="Enter Date of Birth" required >
+            </div>
+            <div id="labels">
+              <label for="gender" id='gender-label'>Gender</label>
+            </div>
+            <div id="fields">
+             <input type="radio" name="gender" value="male" > Male
+             <input type="radio" name="gender" value="female"> Female
+            </div>
+            <div id="labels">
+              <label for="select" id='select-label'>Current Position</label>
+            </div>
+            <div id="fields">
+              <select id="dropdown">
+                <option disabled value>Select an option</option>
+                <option value = "1">Student</option>
+                <option value = "2">Employee</option>
+                <option value = "3">Other</option>
+              </select>
+          </div>
+          <div id="labels">
+            <label for="most-like">What do you like most in FCC</label>
+          </div>
+          <div id="fields">
+            <select id="most-like" name="mostLike" class="dropdown">
+              <option disabled selected value>Select an option</option>
+              <option value="challenges">Challenges</option>
+              <option value="projects">Projects</option>
+              <option value="community">Community</option>
+              <option value="openSource">Open Source</option>
+            </select>
+          </div>
+          <div id="labels">
+            <label for="preferences">Things that should be improved in the future<br>(Check all that apply)</label>
+          </div>
+          <div id="fields">
+            <input type="checkbox" name="prefer" value="1">Front-end Projects<br>
+            <input type="checkbox" name="prefer" value="2">Back-end Projects<br>
+            <input type="checkbox" name="prefer" value="3">Data Visualization<br>
+            <input type="checkbox" name="prefer" value="4">Challenges<br>
+            <input type="checkbox" name="prefer" value="5">Videos<br>
+            <input type="checkbox" name="prefer" value="6">Open Source Community<br>
+            <input type="checkbox" name="prefer" value="7">Gitter help rooms<br>
+            <input type="checkbox" name="prefer" value="8">City Meetups<br>
+            <input type="checkbox" name="prefer" value="9">Wiki<br>
+            <input type="checkbox" name="prefer" value="10">Forum<br>
+          </div>
+          <div id="labels">
+           <label for="comments">Any Comments or Suggestions?</label>
+          </div>
+          <div id="fields">
+            <textarea id="comments" name="comment" placeholder="Enter your comment here..."></textarea>
+          </div>
+          <button id="submit" type="submit">Submit</button>
+        </div>
+    </form>
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+  </body>
+</html>
+
+
+

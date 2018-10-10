@@ -1,0 +1,73 @@
+// padding 0px to 50px
+
+@for $i from 0 through 50 {
+
+	.p-#{$i}{
+		padding : #{$i}px !important;
+	}
+}
+
+// padding top 0px to 50px
+@for $i from 0 through 50 {
+
+	.pt-#{$i}{
+		padding-top : #{$i}px !important;
+	}
+}
+// padding bottom 0px to 50px
+@for $i from 0 through 50 {
+
+	.pb-#{$i}{
+		padding-bottom : #{$i}px !important;
+	}
+}
+// padding right 0px to 50px
+@for $i from 0 through 50 {
+
+	.pr-#{$i}{
+		padding-right : #{$i}px !important;
+	}
+}
+// padding left 0px to 50px
+@for $i from 0 through 50 {
+
+	.pl-#{$i}{
+		padding-left : #{$i}px !important;
+	}
+}
+
+// margin  0px to 50px
+@for $i from 0 through 50 {
+
+	.m-#{$i}{
+		margin : #{$i}px !important;
+	}
+}
+// margin top  0px to 50px
+@for $i from 0 through 50 {
+
+	.mt-#{$i}{
+		margin-top : #{$i}px !important;
+	}
+}
+// margin bottom  0px to 50px
+@for $i from 0 through 50 {
+
+	.mb-#{$i}{
+		margin-bottom : #{$i}px !important;
+	}
+}
+// margin right  0px to 50px
+@for $i from 0 through 50 {
+
+	.mr-#{$i}{
+		margin-right : #{$i}px !important;
+	}
+}
+// margin left  0px to 50px
+@for $i from 0 through 50 {
+
+	.ml-#{$i}{
+		margin-left : #{$i}px !important;
+	}
+}

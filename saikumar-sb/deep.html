@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>taskone</title>
+</head>
+<style>
+*{
+	padding: 0px; 
+    margin:0px;
+}  
+body{
+	background-color:#f2f2f2;
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+.header{
+    width:100%;
+    background: #fff;
+   height: 100px;
+}
+.nav-lis {
+    list-style-type: none;
+    overflow: hidden;
+    background-color: #ffffff;
+    vertical-align:center;
+   text-align: center;
+}
+
+li {
+  display: inline-block;
+    list-style: none;
+    padding: 0 20px;
+    line-height: 100px;
+}
+
+li a {
+    display: block;
+    color: black;
+    text-align: middle;
+    text-decoration: none;
+}
+li a:hover {
+	 color: green;
+}
+.active {
+    color: green;
+}
+ul .desk-view img{
+    width:150px;
+    vertical-align:middle;
+}
+.nav-mobview{
+    display:none;
+}
+
+@media only screen and (max-width: 991px) {
+    
+}
+@media only screen and (max-width: 767px) {
+    header ul .desk-view{
+        display: none;
+    }
+    .nav-mobview{
+        display: block;
+        width: 100%;
+        height: 100px;
+    }
+    .mobile-view img {
+    	width: 150px;
+    }
+    .header .nav-lis{
+        background-color: #f2f2f2;
+        display: none;
+        margin: 20px 0;
+    }
+    .header .nav-lis li{
+        display: block;
+        line-height: normal;
+        padding: 10px;
+    }
+    .header .nav-lis li {
+        margin: 0;
+        padding: 10px;
+    }
+    .header .nav-mobview-.mobile-view > img{
+      width: 160px;
+    }
+    .nav-mobile .mobile-view {
+        display: inline-block;
+        margin: 30px;
+    }
+    
+}
+</style>
+</head>
+<body>
+  <header>
+   <div class = "nav-mobview">
+      <div class = "mobile-view">
+      	<img src="assets/images/sb-logo.svg" alt="script logo">
+      </div>
+      <div class="nav-mobile-right">
+            <label for="nav-toggle" class="nav-toggle"><span></span></label>
+    </div>
+    </div>
+	<ul class="nav-lis">
+		  <li><a class="active" href="#home">Home</a></li>
+		  <li><a href="#aboutUs">About Us</a></li>
+		  <li><a href="#work">Work</a></li>
+		  <li class="desk-view"><a href="#"><img src= "assets/images/sb-logo.svg" alt="script logo"></a></li>
+		  <li><a href="#careers">Careers</a></li>
+		  <li><a href="#technology">Technology</a></li>
+		 <li> <a href="#contactUs">Contact Us</a></li>
+	</ul>
+</body>
+</html>
+
+

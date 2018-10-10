@@ -1,0 +1,262 @@
+body,h1,h3{
+
+	font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+	background-color: #f8f8f8;
+    font-weight: normal;
+}
+h1{
+	font-size: 46px;
+	text-align: center;
+	font-weight: 500;
+	line-height: 1.13;
+	color: #000000;
+	font-family: "Helvetica Neue";
+}
+h3{
+	font-size: 24px;
+	text-align: left;
+	font-weight: 500;
+	line-height: 1.67;
+	font-family: "Helvetica Neue";
+}
+a{
+	cursor: pointer;
+}
+h3.title{
+	margin-left: 40px;
+}
+p.title{
+	font-size: 14px;
+	font-weight: 500;
+	color: #000000;
+	margin-left: 38px;
+	padding-top: 37px;
+	font-family: "Helvetica Neue";
+}
+.navbar{
+	 background-color: #fff;
+	 border: none;
+	 box-shadow: 0 6px 6px -6px #999;
+}
+.navbar-brand {
+      height: auto!important;
+}
+.navbar-brand img{
+	margin-top: -8px;
+}
+.navbar-default .navbar-nav li a{
+	font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	text-align: center;
+	font-weight: 500;
+	color: #0791cd;
+}
+ .navbar-default .navbar-nav li a:hover, 
+ .navbar-default .navbar-nav li a:focus {
+    color: #23527c !important
+}
+.navbar-header{
+	box-shadow: 0 6px 6px -6px #999;
+}
+.navbar-default .navbar-toggle{
+	  /*  width: 35px;
+    height: 30px;*/
+	margin-top: 30px;
+	border: none;
+	background: transparent!important;
+}
+.navbar-toggle .collapsed{
+	background: transparent!important;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+	background: transparent!important;
+}
+.navbar-default .navbar-toggle .icon-bar{
+	background: #85c525;
+	cursor: pointer;
+	height: 5px;
+	width: 35px;
+	 position: relative;
+	 top: -10px;
+	 border-radius: 1px;
+}
+/* Animated Navbar Toggle Icon-Bar start*/
+
+/*.navbar-toggle .icon-bar {
+  //width: 22px;
+  transition: all 0.2s;
+}
+.navbar-toggle .top-bar {
+  transform: rotate(45deg);
+  transform-origin: 10% 10%;
+}
+.navbar-toggle .middle-bar {
+  opacity: 0;
+}
+.navbar-toggle .bottom-bar {
+  transform: rotate(-45deg);
+  transform-origin: 10% 90%;
+}
+.navbar-toggle.collapsed .top-bar {
+  transform: rotate(0);
+}
+.navbar-toggle.collapsed .middle-bar {
+  opacity: 1;
+}
+.navbar-toggle.collapsed .bottom-bar {
+  transform: rotate(0);
+}*/
+.navbar-default .navbar-toggle .icon-bar:before {
+	top:-10px;
+	transition-property: top, transform;
+    -webkit-transition-property: top, transform;
+}
+.navbar-default .navbar-toggle .icon-bar:after {
+	bottom: -10px;
+	transition-property: bottom, transform;
+    -webkit-transition-property: bottom, transform;
+}
+.navbar-default .navbar-toggle .icon-bar:after, .navbar-default .navbar-toggle .icon-bar:before {
+    background-color: #85c525;
+    border-radius: 1px;
+    content: "";
+    display: block;
+    height: 5px;
+    left: 0;
+    position: absolute;
+   	width: 100%;
+    transition-delay: 0.3s, 0s;
+    -webkit-transition-delay: 0.3s, 0s;
+    transition-duration: 0.3s, 0.3s;
+    -webkit-transition-duration: 0.3s, 0.3s;
+}
+
+.navbar-default .navbar-toggle[aria-expanded="true"] .icon-bar::after {
+    bottom: 0px;
+    transform: rotate(-45deg);
+    transition-delay: 0s, 0.3s;
+    
+}
+.navbar-default .navbar-toggle[aria-expanded="true"] .icon-bar::before {
+    top: 0px;
+    transform: rotate(45deg);
+    transition-delay: 0s, 0.3s;
+}
+.navbar-default .navbar-toggle[aria-expanded="true"] .icon-bar{
+        background: transparent none repeat scroll 0 0;
+        //opacity: 0;
+}
+/*.....Animated Navbar end */
+.search-term{
+	margin-top: 137px;
+}
+#form-search{
+	padding-top: 60px;
+}
+#form-search >.form-group {
+	position: relative;
+}
+#form-search >.form-group > .form-control {
+    display: block;
+    border-radius: 0px;
+	height: 67px;
+	background-color: white;
+	border-color: white;
+	box-shadow: 0 5px 24px 0 rgba(0, 0, 0, 0.09);
+	font-family: HelveticaNeue;
+	font-size: 18px;
+	padding: 0px 25px;
+}
+.glyphicon{
+	position: absolute;
+	top: 25px;
+	right: 20px;
+	color: #9b9b9b;
+	font-size: 18px;
+	z-index: 2;
+}
+ul li{
+	list-style-type: none;
+	line-height: 2;
+	font-size: 14px;
+	font-family: "Helvetica Neue";
+	font-weight: 500;
+}
+ul li a{
+	text-decoration: none;
+	color: #4a4a4a;
+	text-align: left;
+
+}
+ul li a:hover,
+ul li a:focus{
+	color: #5d615f;
+}
+.content{
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.links a{
+	font-size: 16px;
+	line-height: 1.25;
+	font-family: "Helvetica Neue";
+	font-weight: 500;
+}
+.footer{
+	background-color: #fff;
+	
+}
+.links-block{
+	padding-top: 37px;
+	padding-bottom: 36px;
+}
+img.logo{
+	margin-top: 20px;
+}
+footer {
+ margin: 0;
+ padding: 0;
+}
+.footer-links{
+	margin: 0;
+	padding: 0;
+}
+.footer-links li{
+	display: inline-block;
+	line-height: 50px;
+}
+.footer-links a{
+	display: block;
+	margin-right: 15px;
+	color: #9b9b9b;
+
+}
+.fa{
+	font-size: 20px;
+	color: #9b9b9b;
+	line-height: 50px;
+}
+ @media only screen and (min-width: 768px) {
+    
+	.col-md-5{
+		padding-left: 48px;
+	}
+}
+@media(min-width: 320px) and (max-width: 767px) {
+	.footer-links{
+		text-align: center;
+	}
+	.img-responsive {
+    margin: 0 auto;
+	}
+	.col-sm-2{
+		width: 100%;
+		text-align: center;
+	}
+	p.title{
+		font-size: 16px;
+	}
+	  
+}

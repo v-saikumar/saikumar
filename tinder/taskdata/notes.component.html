@@ -1,0 +1,502 @@
+ <div class="kc-header--wrapper">
+  <div class="kc-header--hero">
+     <div class="kc-header--info">
+      <div class="kc-half">
+          <div class="kc-header--info_heading d-ib">
+              Bulletins
+            </div>
+      </div>
+     </div>
+  </div>
+  <div class="kc-routeroutlet">
+     <div class="kc-financial-details white-box">
+      <!-- <app-filter></app-filter> -->
+      <mat-form-field>
+        <mat-select placeholder="Filter Option" [placeholder]="'New/Read'" [(ngModel)]="selected" (ngModelChange)="onSelect(selected)">
+          <mat-option  *ngFor="let option of options" [value]="option.viewValue">
+            {{option.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- /mat-form-field -->
+      <div class="note-create-wrapper">
+        <div class="create-note" (click)="openCreateBox()" *ngIf="!notesDom.showCreateNote">
+          Post a bulletin..
+        </div>
+        <div class="create-note-box card-take-note" *ngIf="notesDom.showCreateNote">
+          <mat-card [style.background]="notesData.color">
+            <span class="close" (click)="close()">&times;</span>
+            <mat-card-header class="card-header">
+              <mat-form-field class="field-form">
+                  <input matInput placeholder="Title" class="input-box" [(ngModel)]="notesData.title" maxlength="50">
+              </mat-form-field>
+            </mat-card-header>
+
+            <div *ngIf="notesData.title.length>=50">
+            <p style="color: red">Title cannot exceed 50 characters</p>
+            </div>
+
+            <mat-card-content>
+              <mat-form-field class="field-form">
+                <textarea matInput placeholder="Desription" class="input-box" [(ngModel)]="notesData.description" maxlength="500"></textarea>
+              </mat-form-field>
+             <div *ngIf="notesData.description.length>=500">
+              <p style="color: red">Description cannot exceed 500 characters</p>
+            </div>
+
+              <div><strong>Priority:</strong></div>
+              <div class="clearfix">
+                <span *ngFor="let entry of entries">
+                  <input type="radio" name="radiogroup" [value]="entry.id" (change)="onSelectionChange(entry)">
+                  <span>{{ entry.description }}</span>
+                </span>
+              </div>
+
+              <br><!--  List added Items -->
+              <div class="item-wrapper" *ngFor="let list of notesData.checklist let i = index">
+                <div class="added-item-list">
+                  <mat-checkbox [(ngModel)]="list.checked">{{list.text}}</mat-checkbox>
+                </div>
+                <div class="delete-item">
+                  <mat-icon mat-mini-fab classs="notes-fab-button" (click)="removeAddedItem('item', i)">close</mat-icon>
+                </div>
+              </div>
+              <!-- Added Items Ends here Checklist items -->
+              <div class="checklist-items" *ngIf="notesDom.showAddItem">
+                <div class="checklist-box">
+                  <mat-form-field class="field-form">
+                    <input matInput placeholder="Add Item" [(ngModel)]="notesDom.newItemEntry" class="input-box">
+                  </mat-form-field>
+                </div>
+                <div class="add-more">
+                  <button mat-mini-fab   [ngClass]="(buttonvalue)==true?'notes-fab-button-tag':'notes-fab-button'" (click)="addNewItems('item')">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <!-- End of Checklist items Add students in notes -->
+              <div class="checklist-items" *ngIf="notesDom.showAddStudent">
+                <div class="checklist-box">
+                  <mat-form-field class="field-form">
+                    <input matInput placeholder="Add Student" [(ngModel)]="notesDom.newStudentEntry" class="input-box">
+                  </mat-form-field>
+                </div>
+                <div class="add-more">
+                  <button mat-mini-fab classs="notes-fab-button" (click)="addNewItems('student')">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div *ngIf="checklist==true">
+              <p style="color:red">Cannot add more then 10</p>
+              </div>
+
+
+
+             <div *ngIf="currentUpload">
+               <mat-progress-bar mode="determinate" value={{currentUpload?.progress}}></mat-progress-bar>
+                   {{currentUpload?.name}} {{currentUpload?.progress | number: '1.0-0'}}% Complete
+               </div>
+
+
+
+              <!-- students -->
+             <!--  End of adding students in notes Add User to card -->
+              <div *ngIf="notesDom.showAddUser">
+                <tag-input [maxItems]="50" [ngModel]="notesData.associations" [onlyFromAutocomplete]="true" (onAdd)="addUser($event)" (onRemove)="removeUser($event)">
+                  <tag-input-dropdown [showDropdownIfEmpty]="true" [autocompleteItems]="usersList">
+                  </tag-input-dropdown>
+                </tag-input>
+              </div>
+             <!--  End user add section -->
+            </mat-card-content>
+            <!-- <span class="priority">Action Buttons</span> -->
+            <mat-card-actions class="action-box clearfix">
+              <div class="add-options">
+                  <mat-icon (click)="showItemAdd()" matTooltip="Add List Items">
+                    <i class="material-icons">done_all</i>
+                  </mat-icon>
+                  <mat-icon (click)="showAddUser()" matTooltip="Tag Users">
+                    <i class="material-icons">supervisor_account</i>
+                  </mat-icon>
+
+                  <mat-icon type="file" matTooltip="Add Photo">
+                    <i class="material-icons" >camera</i>
+                   </mat-icon>
+                   <input  type="file" (change)="detectFiles($event)">
+
+                   <button style="top:5px"[disabled]="!selectedFiles" (click)="uploadSingle()" class="bullet-upload">Upload Image</button>
+                   <button style="position: relative; top: 5px;" (click)="deletephoto(currentUpload?.name)">Remove Image</button>
+
+                <mat-form-field [ngStyle]="{'display':'none'}">
+                  <input matInput [matDatepicker]="picker" [(ngModel)]="notesData.reminder" placeholder="Add reminder">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi="true" #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="actions">
+               <button class="blueButton" [disabled]="!notesData.title" (click)="createNote()" style="margin: 0;">ADD</button>
+               </div>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+        <!-- /create-note-box -->
+      </div>
+      <!-- /note-create-wrapper -->
+      <div class="row" *ngIf="notesList.length">
+    <!--   <p>Start</p>
+       <ng-masonry-grid
+                    [masonryOptions]="{ transitionDuration: '0.8s', gutter: 5 }" 
+                    [useAnimation]="true"
+                    [useImagesLoaded]="true"
+                    [scrollAnimationOptions]="{ animationEffect: 'effect-4', minDuration : 0.4, maxDuration : 0.7 }">
+      Masonry Grid Item
+      <ng-masonry-grid-item  *ngFor="let item of masonryItems"> 
+        Grid Content
+       <h4>{{item.title}}</h4> 
+        <img src="some_image.jpg" alt="No image" />
+      </ng-masonry-grid-item>
+    </ng-masonry-grid>
+     <p>End</p> -->
+       <ng-masonry-grid  class=""  
+                        *ngFor="let note of notesList | activefilter: selected" 
+                       (dblclick)="readNote(note)"
+                    [masonryOptions]="{ gutter: 0 }" 
+                    [useImagesLoaded]="true" >
+      <!--  <div [ngClass]="(note.prioStatus)==High?'column note-box-ctrl':'column'" *ngFor="let note. of notesList | activefilter: selected"  (dblclick)="readNote(note)"> -->
+          <ng-masonry-grid-item style="padding:3px;" 
+          [ngClass]="(note.prioStatus)=='High'?'note-box-ctrl':'note-box-reg-ctrl'">
+
+              <mat-card  *ngIf="note" [style.background]="note.default_color">
+              <div class="bulletin-bell">
+                <td-notification-count *ngIf="(note.read)==false" class="notification-read" positionX="after" positionY="top" [notifications]="true">
+                  <mat-icon>notifications</mat-icon>
+                </td-notification-count>
+                <td-notification-count *ngIf="(note.read)==true" class="notification-unread" positionX="after" positionY="top" [notifications]="true">
+                  <mat-icon>notifications</mat-icon>
+                </td-notification-count>
+              </div>
+              <div class="notes-options">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" yPosition="below">
+                  <button mat-menu-item *ngIf="(R_id)==true" (click)="openReplyPrompt(note)">
+                    <mat-icon>reply</mat-icon> Reply
+                  </button>
+                  <button mat-menu-item *ngIf="(E_id)==true" (click)="openeditPrompt(note)">
+                    <mat-icon>edit</mat-icon> Edit
+                  </button>
+                  <button mat-menu-item *ngIf="(nR_id)==true" (click)="moveNewandRead(note)">
+                    <mat-icon>mail</mat-icon> Move to New/Read
+                  </button>
+                  <button mat-menu-item *ngIf="(A_id)==true" (click)="archiveConfirm(note)">
+                    <mat-icon>archive</mat-icon> Archive
+                  </button>
+                  <button mat-menu-item (click)="opendeleteConfirm(note)">
+                    <mat-icon>delete</mat-icon> Delete
+                  </button>
+                </mat-menu>
+              </div>
+          <div class="bullet-img-block" *ngIf="note.fileuploadData"><a (click)="toggleR()">
+          <span class="bulletin-img"><img src="{{note.fileuploadData.url}}"></span></a>
+          </div>
+                <!-- /notes-options -->
+                <div class="header-title">
+                  <span>{{note.title.length>50?note.title.substring(0,50).concat("..."):note.title.substring(0,note.title.length) }}</span>
+                </div>
+                <!-- /header-title -->
+                <mat-card-content class="notes-list-content">
+                  <div class="notes-list-description">
+                    <span>{{note.description.length>100?note.description.substring(0,100).concat("..."):note.description.substring(0,note.description.length) }}</span>
+                  </div>
+                  <div class="notes-list-checklist">
+                    <div class="notes-list-checkList" *ngFor="let checkList of note.checklist">
+                      <mat-checkbox [(ngModel)]="checkList.checked">{{checkList.text}}</mat-checkbox>
+                    </div>
+                  </div>
+                 <!--  <mat-radio-group>
+                   <mat-radio-button *ngFor="let Prioritys of note.prio" value="Prioritys.id"[checked]="Prioritys.value==true" >{{Prioritys.description}}</mat-radio-button>
+                 </mat-radio-group> -->
+                     <div *ngIf="note.reply.length>0">
+                       <p style="font-weight: bold;">Reply:<span style="display: inline-block; font-weight: normal; padding-left: 5px;">{{note.reply}}</span></p>
+                     </div>
+                    <div class="inline-ele">
+                      <div class="clearfix" *ngIf="note.associations">
+                        <mat-chip-list *ngFor="let tag of note.associations;let i=index"   style="">
+                           <div *ngIf="i<9">
+                           <mat-chip selected="true"
+                           [ngStyle]="{'background-color':getColor(i)}" style="font-size: 10px; line-height: 10px; padding: 5px 10px; border-radius: 5px;">
+                            {{tag.name}}
+                          </mat-chip>
+                           </div>
+                        </mat-chip-list>
+                      </div>
+                    </div>
+                </mat-card-content>
+              </mat-card>
+              </ng-masonry-grid-item>
+        </ng-masonry-grid>
+        <!-- /row /note-box-ctrl -->
+      </div>
+      <!-- /row -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="row" *ngIf="notesList.length">
+  <div class="column" *ngFor="let note of notesList | activefilter: selected" 
+                       (dblclick)="readNote(note)" >
+      <div [ngClass]="(note.prioStatus)==High?'column note-box-ctrl':'column'" *ngFor="let note. of notesList | activefilter: selected"  (dblclick)="readNote(note)">
+          <div [ngClass]="(note.prioStatus)=='High'?'note-box-ctrl':'note-box-reg-ctrl'">
+              <mat-card  *ngIf="note" [style.background]="note.default_color">
+              <div class="bulletin-bell">
+                <td-notification-count *ngIf="(note.read)==false" class="notification-read" positionX="after" positionY="top" [notifications]="true">
+                  <mat-icon>notifications</mat-icon>
+                </td-notification-count>
+                <td-notification-count *ngIf="(note.read)==true" class="notification-unread" positionX="after" positionY="top" [notifications]="true">
+                  <mat-icon>notifications</mat-icon>
+                </td-notification-count>
+              </div>
+              <div class="notes-options">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" yPosition="below">
+                  <button mat-menu-item *ngIf="(R_id)==true" (click)="openReplyPrompt(note)">
+                    <mat-icon>reply</mat-icon> Reply
+                  </button>
+                  <button mat-menu-item *ngIf="(E_id)==true" (click)="openeditPrompt(note)">
+                    <mat-icon>edit</mat-icon> Edit
+                  </button>
+                  <button mat-menu-item *ngIf="(nR_id)==true" (click)="moveNewandRead(note)">
+                    <mat-icon>mail</mat-icon> Move to New/Read
+                  </button>
+                  <button mat-menu-item *ngIf="(A_id)==true" (click)="archiveConfirm(note)">
+                    <mat-icon>archive</mat-icon> Archive
+                  </button>
+                  <button mat-menu-item (click)="opendeleteConfirm(note)">
+                    <mat-icon>delete</mat-icon> Delete
+                  </button>
+                </mat-menu>
+              </div>
+          <div class="bullet-img-block" *ngIf="note.fileuploadData"><a (click)="toggleR()">
+          <span class="bulletin-img"><img src="{{note.fileuploadData.url}}"></span></a>
+          </div>
+                /notes-options
+                <div class="header-title">
+                  <span>{{note.title.length>50?note.title.substring(0,50).concat("..."):note.title.substring(0,note.title.length) }}</span>
+                </div>
+                /header-title
+                <mat-card-content class="notes-list-content">
+                  <div class="notes-list-description">
+                    <span>{{note.description.length>100?note.description.substring(0,100).concat("..."):note.description.substring(0,note.description.length) }}</span>
+                  </div>
+                  <div class="notes-list-checklist">
+                    <div class="notes-list-checkList" *ngFor="let checkList of note.checklist">
+                      <mat-checkbox [(ngModel)]="checkList.checked">{{checkList.text}}</mat-checkbox>
+                    </div>
+                  </div>
+                 <mat-radio-group>
+                   <mat-radio-button *ngFor="let Prioritys of note.prio" value="Prioritys.id"[checked]="Prioritys.value==true" >{{Prioritys.description}}</mat-radio-button>
+                 </mat-radio-group>
+                     <div *ngIf="note.reply.length>0">
+                       <p style="font-weight: bold;">Reply:<span style="display: inline-block; font-weight: normal; padding-left: 5px;">{{note.reply}}</span></p>
+                     </div>
+                    <div class="inline-ele">
+                      <div class="clearfix" *ngIf="note.associations">
+                        <mat-chip-list *ngFor="let tag of note.associations;let i=index"   style="">
+                           <div *ngIf="i<9">
+                           <mat-chip selected="true"
+                           [ngStyle]="{'background-color':getColor(i)}" style="font-size: 10px; line-height: 10px; padding: 5px 10px; border-radius: 5px;">
+                            {{tag.name}}
+                          </mat-chip>
+                           </div>
+                        </mat-chip-list>
+                      </div>
+                    </div>
+                </mat-card-content>
+              </mat-card>
+              </div>
+        </div>
+        /row /note-box-ctrl
+      </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <mat-card>
+            <div class="create-note-box">
+              <span class="close" (click)="closemodal()">&times;</span>
+              <br>
+              <form [formGroup]="editForm">
+                <mat-form-field class="field-form">
+                  <input matInput placeholder="Title" class="form-control" formControlName="title" [(ngModel)]="noteEditData['title']" name="title" id="title">
+                </mat-form-field>
+                <mat-card-content style="margin-bottom: 0;">
+                  <mat-form-field class="field-form">
+                    <textarea matInput placeholder="Desription" class="form-control" formControlName="description" [(ngModel)]="noteEditData['description']" name="description" id="description"></textarea>
+                  </mat-form-field>
+
+                  <div><strong>Priority:</strong></div>
+                  <div class="clearfix">
+                    <span *ngFor="let Prioritys of noteEditData.prio">
+                      <input type="radio" name="radiogroup" [value]="Prioritys.id" [checked]="Prioritys.value==true"
+                      (change)="onSelectionChange(Prioritys)">
+                      <span>{{ Prioritys.description }}</span>
+                    </span>
+                  </div>
+
+                  <div class="notes-list-checklist">
+                    <div class="notes-list-checkList" *ngFor="let editcheck of noteEditData.checklist; let i = index;">
+                      <mat-checkbox [(ngModel)]="noteEditData['checklist'][i]" [checked]="editcheck.checked">{{editcheck.text}}</mat-checkbox>
+                      <br>
+                    </div>
+
+                   <!--  <mat-chip-list >
+                     <mat-chip *ngFor="let tag of noteEditData.tags;let i=index" selected="true" [ngStyle]="{'background-color':getColor(i)}">
+                       {{tag.name}}
+                     </mat-chip>
+                   </mat-chip-list> -->
+
+                  </div>
+                  <div class="clearfix">
+                    <div style="float: right;">
+                      <button class="ghostButton" (click)="cancelEditnotedata()">Cancel</button>
+                      <button class="blueButton" (dblclick)="sumbitEditnotedata(noteEditData)">Update</button>
+                   </div>
+                  </div>
+
+                </mat-card-content>
+              </form>
+            </div>
+            <!-- /create-note-box -->
+          </mat-card>
+        </div>
+      </div>
+      <!-- /modal -->
+      <div id="replyModal" class="modal">
+        <div class="modal-content">
+          <mat-card>
+            <div class="create-note-box">
+              <span class="close" (click)="closemodal()">&times;</span>
+             <form [formGroup]="ReplyForm">
+                <mat-form-field class="field-form">
+                  <input matInput placeholder="Title" class="form-control" formControlName="title" [(ngModel)]="noteEditData['title']" name="title" id="title" readonly>
+                </mat-form-field>
+                <mat-card-content>
+             <mat-form-field class="field-form">
+              <input matInput placeholder="Reply" class="form-control" formControlName="reply"
+              [(ngModel)]="noteEditData['reply']" name="reply" id="reply">
+                 </mat-form-field>
+
+                  <div class="clearfix">
+                    <div style="float: right;">
+                      <button class="ghostButton" (click)="cancelEditnotedata()">Cancel</button>
+                      <button class="blueButton" (click)="replyEditnotedata(noteEditData)">Reply</button>
+                    </div>
+
+                  </div>
+                </mat-card-content>
+              </form>
+
+
+            </div>
+          </mat-card>
+        </div>
+      </div>
+      <!-- /row -->
+      <div id="viewModal" class="modal">
+        <div class="modal-content-view">
+          <mat-card [style.background]="noteViewData.color">
+            <span class="close" (click)="closemodal()">&times;</span>
+            <form [formGroup]="RecipeForm">
+
+
+<div class="bullet-img-block" *ngIf="noteViewData.fileuploadData">
+  <span class="bulletin-img"><img src="{{noteViewData.fileuploadData.url}}"></span>
+  </div>
+
+
+
+
+
+              <div class="header-title">
+                <span>{{noteViewData.title ?  noteViewData.title : 'No Title' | uppercase}}</span>
+              </div>
+              <mat-card-content class="notes-list-content">
+                <div class="notes-list-description">
+                  <span>{{noteViewData.description }}</span>
+                </div>
+                <div class="notes-list-checklist">
+                  <div class="notes-list-checkList" *ngFor="let checkList of noteViewData.checklist">
+                    <mat-checkbox [checked]="checkList.checked">{{checkList.text}}</mat-checkbox>
+                  </div>
+                </div>
+                <div *ngIf="noteViewData.reply">
+                  <div *ngIf="noteViewData.reply.length>0">
+  <p style="font-weight: bold;">Reply:<span style="display: inline-block; font-weight: normal; padding-left: 5px;">{{noteViewData.reply}}</span></p>
+</div>
+                </div>
+
+                <mat-radio-group class="pop-radio">
+                  <mat-radio-button *ngFor="let Prioritys of noteViewData.prio" value="Prioritys.id"[checked]="Prioritys.value==true" >{{Prioritys.description}}</mat-radio-button>
+                </mat-radio-group>
+
+               <div class="clearfix">
+                  <mat-chip-list *ngIf="noteViewData.associations" style="float: right; margin: 15px 0 0;">
+                   <mat-chip *ngFor="let tag of noteViewData.associations;let i=index" selected="true"
+                     [ngStyle]="{'background-color':getColor(i)}" style="font-size: 10px; line-height: 10px; padding: 5px 10px; border-radius: 5px;">
+                      {{tag.name}}
+                    </mat-chip>
+
+                  </mat-chip-list>
+                </div>
+                <div class="date-display">
+                 <div class="created-name">
+                <span>Created by: {{noteViewData.created_by}}</span>
+              </div>
+                  <span>{{noteViewData.time | date:'MM-dd-yyyy'}}</span> &nbsp;
+                  <span>{{noteViewData.time | date:'shortTime'}}</span>
+                </div>
+              </mat-card-content>
+            </form>
+          </mat-card>
+        </div>
+      </div>
+     </div>
+   </div>
+</div>

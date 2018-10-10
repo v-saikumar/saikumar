@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import "mixin";
+/* ...font variables...*/
+/*$font-family : 'san_francisco_textregular';*/
+$font-family : 'Open Sans', sans-serif; 
+
+/*...color variables....*/
+$white-color: #ffffff;
+$blue-color: #3498db;
+$orange-color: #f7921e;
+$alabaster-color: #fafafa;
+$gallery-color: #ebebeb;
+$corduroy-color: #5d615f;
+$cerulean-color:#5dc976;
+$alto-color: #dadada;
+$tundora-color: #4a4a4a;
+$black-color: #333;
+
+
+body {
+  /*font-family: system, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Lucida Grande";*/
+	//font-family: 'Open Sans', sans-serif; 
+}
+.jumbotron {
+	width:100%;
+	min-height: 490px;
+	background-color: rgba(0, 0, 0, 0.6);
+	background-image: url("../img/photo.jpeg");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size:100% 100%;
+	color: $white-color;
+		p {
+			margin-bottom: 0px;
+			font-size: 14px;
+			font-weight: 500;
+			line-height: normal;
+			font-family: $font-family;
+		}
+		h1{
+			font-family: $font-family;
+			font-size: 45px;
+			line-height: 1;
+			font-weight: bold;
+		}
+		.media-left img {
+				height: 60px;
+				width: 60px;
+				border-radius: 4px;
+				background-color: $white-color;
+		}
+		.media-body {
+			p {
+				&:last-child {
+					font-size: 16px;
+					font-weight: bold;
+					font-family: $font-family;
+				}
+			}
+			.material-icons{
+				color: $blue-color;
+				font-size: 18px;
+			}
+
+		}
+		.btn{
+			border-radius: 5px;
+			background-color: $orange-color;
+			color: $white-color;
+			width: 100%;
+		}
+		ul {
+			margin:0;  
+	    	padding:0;
+	    	list-style: none;
+	    	font-size: 18px;
+			font-weight: 500;
+				li{
+					display: inline-block;
+					padding-right:30px;
+					padding-top: 10px;
+					line-height: 2;
+					font-size: 18px;
+					font-weight: 500;
+					font-family: $font-family;
+				}
+				a{
+					color: $white-color;
+					text-decoration: none;
+					&:hover{
+						text-decoration: none;
+					}
+				}
+		}
+}
+.material-icons {
+	vertical-align: middle;
+}
+.navbar {
+	min-height: 80px;
+	background-color: $alabaster-color;
+	border: solid 1px $gallery-color;
+	.navbar-nav li{
+
+		a{
+			color:  $corduroy-color ;
+			font-size: 18px;
+			font-weight: 500;
+			font-family: $font-family;
+			@include mQ(768px){
+				padding-top: 26.5px;
+			}
+		}
+		.updates{
+			color: $cerulean-color !important;
+			font-size: 14px;
+			font-weight: 500;
+		}
+	}
+}
+
+.box{
+	box-sizing: border-box;
+	background-color: $white-color;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+	position: relative;
+	padding:  30px ;
+	@include mQ(768px){
+		position: relative;
+		margin-top: -140px;
+	}
+	.progress{
+		width: 100%;
+		height: 5px;
+	  	border-radius: 3px;
+		opacity: 0.3;
+		background-color: #9b9b9b;
+		.progress-bar{
+			background-color: #5dc976;
+		}
+		
+	}
+	.btn-location{
+		height: 32px;
+		border-radius: 30px;
+		background-color: $white-color;
+		border: solid 1px $gallery-color;
+		font-family: $font-family;
+		font-size: 14px;
+		font-weight: 500;
+		text-align: left;
+		.fa{
+		  	color: $alto-color;
+		  	height: 15px;
+		  	padding-right: 3px;
+		}
+	}
+	.btn-text{
+		border-radius: 4px;
+		background-color: $gallery-color;
+		border: solid 1px $gallery-color;
+		font-size: 12px;
+		font-family: $font-family;
+		font-weight: 500;
+		text-align: center;
+		margin-top: 10px;
+	}
+}
+.box-h{
+	font-size: 32px;
+	font-weight: 500;
+	font-family: $font-family;
+	text-align: left;
+}
+.box-p{
+	opacity: 0.64;
+	font-family: $font-family;
+	font-size: 18px;
+	text-align: left;
+}
+.heading{
+ 	    font-size: 18px;
+	  	font-weight: bold;
+    	font-family: $font-family;
+    	text-align: left;
+    	line-height: 1.39;
+ }
+ .sub-h{
+ 	line-height: 1.56;
+ 	font-size: 16px;
+ 	font-weight: normal;
+ 	font-family: $font-family;
+ 	text-align: left;
+ 	opacity: 0.5;
+}
+.box-img{
+	width: 100%;
+	box-sizing: border-box;
+	background-color: rgba(0, 0, 0, 0.53);
+	background-image: url("../img/image4.jpg");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100% 100%;
+	color: $white-color;
+	padding: 30px;
+	.box-text-p{
+	  	font-size: 14px;
+    	font-family: $font-family;
+    	font-weight: normal;
+	}
+	.box-img-p{
+		font-size: 18px;
+	  	font-weight: 500;
+    	font-family: $font-family;
+    	text-align: left;
+	}
+	.box-img-h {
+	  	font-size: 32px;
+	  	font-weight: 500;
+    	font-family: $font-family;
+    	text-align: left;
+	}
+	.box-text{
+		font-size: 16px;
+    	font-family: $font-family;
+    	font-weight: normal;
+    	text-align: left;
+	}
+	.box-btn{
+		width: 100%;
+		border-radius: 5px;
+		background-color: $white-color;
+		border: solid 1px $alto-color; 
+		color: $tundora-color;
+		font-family:$font-family;
+	}
+}
+.donor-box{
+	box-sizing: border-box;
+	background-color: $white-color;
+  	border: solid 1px $gallery-color;
+	padding: 25px;
+	.donor-person{
+	  	font-size: 16px;
+	 	font-weight: bold;
+	 	font-family: $font-family;
+	 	text-align: left;
+	 	line-height: normal;
+  	}
+  	.donor-amount{
+  		font-size: 18px;
+  		font-weight: 500;
+  		color: $orange-color;
+  		line-height: normal;
+  	}
+  	.donor-time{
+  		font-size: 14px;
+  		font-weight: normal;
+  		text-align: left;
+  		font-family: $font-family;
+  		opacity: 0.5;
+  		line-height: normal;
+  		a{
+  			text-decoration: none;
+  		}
+  	}
+}
+.donations-box{
+	box-sizing: border-box;
+	background-color: $white-color;
+  	border: solid 1px $gallery-color;
+  	padding: 15px 20px 5px;
+  	p{
+  		font-size: 16px;
+  		font-weight: 500;
+  		font-family: $font-family;
+  	}
+  	i{
+  		color: #9b9b9b;
+  		font-size: 20px;
+  	}
+}
+hr{
+	 border: solid 1px $gallery-color;
+}
+.panel{
+    border: solid 1px $alto-color;
+    .panel-body{
+    	padding-left: 25px;
+    }
+	.panel-h{
+		font-size: 20px;
+		font-weight: 500;
+		font-family: $font-family;
+		text-align: left;
+		line-height: 1.35;
+	}
+	.panel-text{
+		font-size: 16px;
+		font-family: $font-family;
+		text-align: left;
+		font-weight: normal;
+	}
+}
+footer{
+	min-height: 50px;
+	background-color: $white-color;
+	border: solid 1px $gallery-color;
+	p{
+		margin-top: 15px;
+		margin-bottom: 15px;
+	}
+}
